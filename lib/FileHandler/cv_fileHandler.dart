@@ -91,6 +91,7 @@ class CVFileHandler {
   }
 
   Future<bool> _findTargetFile(String path, String target) async {
+    if (await FileSystemEntity.isDirectory(path) == false) return false;
     Stream<FileSystemEntity> fileList = Directory(path).list();
     await for(FileSystemEntity file in fileList) {
       if (target == p.extension(file.path)) return true;
